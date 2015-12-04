@@ -1,0 +1,23 @@
+irb1200:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_2
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  joint2_position_controller:
+    type: effort_controllers/JointVelocityController
+    joint: wheelRFJ
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  joint3_position_controller:
+    type: effort_controllers/JointVelocityController
+    joint: wheelLBJ
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  joint4_position_controller:
+    type: effort_controllers/JointVelocityController
+    joint: wheelRBJ
+    pid: {p: 10.0, i: 0.0, d: 0.0}
