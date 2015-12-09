@@ -4,7 +4,7 @@
 
 <xacro:property name="wheeloffsetX" value="0.38" />
 <xacro:property name="wheeloffsetY" value="0.308" />
-<xacro:property name="wheeloffsetZ" value="0.093" />
+<xacro:property name="wheeloffsetZ" value="0.127" />
 	<xacro:macro name="arm_link" params="name rpy xyz filename collisionfile *material *inertial">
 		<link name="${name}">	
 			<visual>
@@ -64,10 +64,10 @@
 
 	<link name="tool0"/>
 	<link name="base"/>
-	<link name="dummy"/>
+	<link name="base_link"/>
 	      <joint name="fixed" type="fixed">
-            <parent link="dummy"/>
-            <child link="base_link"/>
+            <parent link="base_link"/>
+            <child link="car_base"/>
             <origin rpy="0 0 0" xyz="0 0 0.034"/>
           </joint>
 	<link name="camera_link">
@@ -93,7 +93,7 @@
         </inertial>
    </link>
 
-	<xacro:arm_link name="base_link" rpy="0 0 0" xyz="0 0 0.034" filename="package://mobile_arm_description/meshes/visual/mobilebase.STL" collisionfile="package://mobile_arm_description/meshes/collision/mobilebasemesh.stl">
+	<xacro:arm_link name="car_base" rpy="0 0 0" xyz="0 0 0" filename="package://mobile_arm_description/meshes/visual/mobilebase.STL" collisionfile="package://mobile_arm_description/meshes/collision/mobilebasemesh.stl">
 		<material name="grey">
 			 <color rgba="0.7 0.7 0.7 1"/>
 	    </material>
@@ -240,8 +240,8 @@
         	<origin xyz="0 0 0" rpy="0 0 0"/>
         </joint>
 
-        <joint name="link_0-base_link" type="fixed">
-        	<parent link="base_link"/>
+        <joint name="link_0-car_base" type="fixed">
+        	<parent link="car_base"/>
         	<child link="link_0"/>
         	<origin xyz="0.182 0 0.677" rpy="0 0 0"/>
         </joint>
@@ -276,7 +276,7 @@
 	<static>false</static>
 </gazebo>
 
-<xacro:gazebo_link name="base_link" color="Grey" gravity="true" collide="true" mu="0.2"/>
+<xacro:gazebo_link name="car_base" color="Grey" gravity="true" collide="true" mu="0.2"/>
 <xacro:gazebo_link name="link_0" color="Orange" gravity="true" collide="true" mu="0.2"/>
 <xacro:gazebo_link name="link_1" color="Orange" gravity="true" collide="true" mu="0.2"/>
 <xacro:gazebo_link name="link_2" color="Orange" gravity="true" collide="true" mu="0.2"/>

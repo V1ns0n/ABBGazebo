@@ -1,0 +1,114 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find mobile_arm_description)/urdf/deg_to_rad.xacro" />
+  <xacro:include filename="$(find mobile_arm_description)/urdf/inertia.xacro"/>
+  <xacro:include filename="$(find mobile_arm_description)/urdf/gripper.transmission.xacro"/>
+  <xacro:include filename="$(find mobile_arm_description)/urdf/gripper.gazebo.xacro"/>
+  <xacro:include filename="$(find mobile_arm_description)/urdf/materials.urdf.xacro"/>
+
+  <xacro:property name="gripper_mass" value="0.001"/>
+  <xacro:property name="gripper_friction" value="0.0"/>
+  <xacro:property name="gripper_damping" value="0.5"/>
+  <xacro:property name="gripper_eps" value="0.01"/>
+  <xacro:property name="finger_size_x" value="0.1"/>
+  <xacro:property name="finger_size_y" value="0.01"/>
+  <xacro:property name="finger_size_z" value="0.03"/>
+
+  <xacro:macro name="gripper" params="parent">
+    <link name="finger_1_link">
+      <visual>
+        <geometry>
+          <box size="${finger_size_x} ${finger_size_y} ${finger_size_z}"/>
+        </geometry>
+        <origin xyz="${finger_size_x/2.0} 0.0 0.0"/>
+        <material name="white"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <box size="${finger_size_x} ${finger_size_y} ${finger_size_z}"/>
+        </geometry>
+        <origin xyz="${finger_size_x/2.0} 0.0 0.0"/>
+      </collision>
+
+      <inertial>
+        <origin xyz="0.0 0.0 ${finger_size_x/2.0}"/>
+        <mass value="${gripper_mass}"/>
+        <cuboid_inertia mass="${gripper_mass}" x="${finger_size_x}" y="${finger_size_y}" z="${finger_size_z}"/>
+      </inertial>
+    </link>
+
+    <link name="finger_2_link">
+      <visual>
+        <geometry>
+          <box size="${finger_size_x} ${finger_size_y} ${finger_size_z}"/>
+        </geometry>
+        <origin xyz="${finger_size_x/2.0} 0.0 0.0"/>
+        <material name="white" />
+      </visual>
+
+      <collision>
+        <geometry>
+          <box size="${finger_size_x} ${finger_size_y} ${finger_size_z}"/>
+        </geometry>
+        <origin xyz="${finger_size_x/2.0} 0.0 0.0"/>
+      </collision>
+
+      <inertial>
+        <origin xyz="${finger_size_x/2.0} 0.0 0.0"/>
+        <mass value="${gripper_mass}"/>
+        <cuboid_inertia mass="${gripper_mass}" x="${finger_size_x}" y="${finger_size_y}" z="${finger_size_z}"/>
+      </inertial>
+    </link>
+
+    <joint name="finger_1_joint" type="prismatic">
+      <parent link="${parent}"/>
+      <child link="finger_1_link"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="1.0" lower="-0.15" upper="0.0" velocity="5.0"/>
+      <dynamics friction="${gripper_friction}" damping="${gripper_damping}"/>
+
+      <safety_controller k_position="20"
+                         k_velocity="20"
+                         soft_lower_limit="${-0.15 + gripper_eps}"
+                         soft_upper_limit="${ 0.0  - gripper_eps}"/>
+    </joint>
+
+    <joint name="finger_2_joint" type="prismatic">
+      <parent link="${parent}"/>
+      <child link="finger_2_link"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="1.0" lower="0" upper="0.15" velocity="5.0"/>
+      <dynamics friction="${gripper_friction}" damping="${gripper_damping}"/>
+
+      <safety_controller k_position="20"
+                         k_velocity="20"
+                         soft_lower_limit="${0.0  + gripper_eps}"
+                         soft_upper_limit="${0.15 - gripper_eps}"/>
+    </joint>
+
+    <!-- Grasping frame -->
+    <link name="grasping_frame">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.0001"/>
+        <cuboid_inertia mass="0.0001" x="0.001" y="0.001" z="0.001"/>
+      </inertial>
+    </link>
+
+    <joint name="grasping_frame_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="grasping_frame"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Transmissions -->
+    <arm_simple_transmission name="finger_1" reduction="1.0"/>
+    <arm_simple_transmission name="finger_2" reduction="1.0"/>
+
+    <!-- Simulation (gazebo) -->
+    <gripper_gazebo/>
+  </xacro:macro>
+</robot>

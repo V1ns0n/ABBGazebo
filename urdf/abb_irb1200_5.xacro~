@@ -64,10 +64,10 @@
 
 	<link name="tool0"/>
 	<link name="base"/>
-	<link name="dummy"/>
+	<link name="base_link"/>
 	      <joint name="fixed" type="fixed">
-            <parent link="dummy"/>
-            <child link="base_link"/>
+            <parent link="base_link"/>
+            <child link="car_base"/>
             <origin rpy="0 0 0" xyz="0 0 0.034"/>
           </joint>
 	<link name="camera_link">
@@ -93,7 +93,7 @@
         </inertial>
    </link>
 
-	<xacro:arm_link name="base_link" rpy="0 0 0" xyz="0 0 0.034" filename="package://mobile_arm_description/meshes/visual/mobilebase.STL" collisionfile="package://mobile_arm_description/meshes/collision/mobilebasemesh.stl">
+	<xacro:arm_link name="car_base" rpy="0 0 0" xyz="0 0 0.034" filename="package://mobile_arm_description/meshes/visual/mobilebase.STL" collisionfile="package://mobile_arm_description/meshes/collision/mobilebasemesh.stl">
 		<material name="grey">
 			 <color rgba="0.7 0.7 0.7 1"/>
 	    </material>
@@ -240,8 +240,8 @@
         	<origin xyz="0 0 0" rpy="0 0 0"/>
         </joint>
 
-        <joint name="link_0-base_link" type="fixed">
-        	<parent link="base_link"/>
+        <joint name="link_0-car_base" type="fixed">
+        	<parent link="car_base"/>
         	<child link="link_0"/>
         	<origin xyz="0.182 0 0.677" rpy="0 0 0"/>
         </joint>
@@ -264,19 +264,19 @@
 
 	<xacro:arm_joint name="joint_6" type="revolute" o_xyz="0.082 0 0" o_rpy="0 0 0" a_xyz="1 0 0" effort="1000.0" lower="-6.28" upper="6.28" velocity="10.47" p_link="link_5" c_link="link_6"/>
 
-	<xacro:wheel_joint name="wheelLFJ" type="continuous" o_xyz="${wheeloffsetX} ${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="base_link" c_link="wheelLF"/>	
+	<xacro:wheel_joint name="wheelLFJ" type="continuous" o_xyz="${wheeloffsetX} ${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="car_base" c_link="wheelLF"/>	
 
-	<xacro:wheel_joint name="wheelLBJ" type="continuous" o_xyz="-${wheeloffsetX} ${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="base_link" c_link="wheelLB"/>	
+	<xacro:wheel_joint name="wheelLBJ" type="continuous" o_xyz="-${wheeloffsetX} ${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="car_base" c_link="wheelLB"/>	
 
-	<xacro:wheel_joint name="wheelRFJ" type="continuous" o_xyz="${wheeloffsetX} -${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="base_link" c_link="wheelRF"/>	
+	<xacro:wheel_joint name="wheelRFJ" type="continuous" o_xyz="${wheeloffsetX} -${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="car_base" c_link="wheelRF"/>	
 
-	<xacro:wheel_joint name="wheelRBJ" type="continuous" o_xyz="-${wheeloffsetX} -${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="base_link" c_link="wheelRB"/>	
+	<xacro:wheel_joint name="wheelRBJ" type="continuous" o_xyz="-${wheeloffsetX} -${wheeloffsetY} ${wheeloffsetZ}" o_rpy="0 0 0" a_xyz="0 1 0" effort="1000.0" velocity="15" p_link="car_base" c_link="wheelRB"/>	
 
 <gazebo>
 	<static>false</static>
 </gazebo>
 
-<xacro:gazebo_link name="base_link" color="Grey" gravity="true" collide="true" mu="0.2"/>
+<xacro:gazebo_link name="car_base" color="Grey" gravity="true" collide="true" mu="0.2"/>
 <xacro:gazebo_link name="link_0" color="Orange" gravity="true" collide="true" mu="0.2"/>
 <xacro:gazebo_link name="link_1" color="Orange" gravity="true" collide="true" mu="0.2"/>
 <xacro:gazebo_link name="link_2" color="Orange" gravity="true" collide="true" mu="0.2"/>

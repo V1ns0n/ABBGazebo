@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find mobile_arm_description)/config/robot.rviz" output="screen"/-->
+    <node name="rviz" pkg="rviz" type="rviz" output="screen">
+	</node>
+</launch>
