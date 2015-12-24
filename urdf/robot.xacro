@@ -1,0 +1,8 @@
+<robot xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" name="mobile_arm">
+	
+	<xacro:include filename="$(find mobile_arm_description)/urdf/abb_irb1200_5.xacro" />
+	<xacro:include filename="$(find mobile_arm_description)/urdf/gripper.xacro" />
+	
+	<xacro:gripper parent="tool0"/>
+	
+</robot>

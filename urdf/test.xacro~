@@ -1,0 +1,27 @@
+<robot name="rrbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="link1"/>
+  </joint>
+<link name="link1">
+	<visual>
+		<geometry>
+			<mesh filename="package://mobile_arm_description/meshes/visual/IRB1200_7-705-90_IRC5_Base_Standard_rev0.STL"/>
+		</geometry>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+	</visual>
+	<collision>
+		<geometry>
+			<mesh filename="package://mobile_arm_description/meshes/collision/baselink.stl"/>
+		</geometry>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+	</collision>
+	<inertial>
+		<origin rpy="0 0 0" xyz="-0.028996 0.000593 0.112726"/>
+		   	 <mass value="0.1"/>
+		    <inertia ixx="0.000093" ixy="0" ixz="0" iyy="0.000128" iyz="0" izz="0.000119"/>		
+	</inertial>
+  </link>
+</robot>
