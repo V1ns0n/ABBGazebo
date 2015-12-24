@@ -1,14 +1,8 @@
 <?xml version="1.0"?>
 <package>
-<<<<<<< HEAD
   <name>ABBGazebo</name>
   <version>0.0.0</version>
   <description>The ABBGazebo package</description>
-=======
-  <name>mobile_arm_description</name>
-  <version>0.0.0</version>
-  <description>The mobile_arm_description package</description>
->>>>>>> 99a0321d80826138d39254aa296b96160470d2a3
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -25,11 +19,7 @@
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-<<<<<<< HEAD
   <!-- <url type="website">http://wiki.ros.org/ABBGazebo</url> -->
-=======
-  <!-- <url type="website">http://wiki.ros.org/mobile_arm_description</url> -->
->>>>>>> 99a0321d80826138d39254aa296b96160470d2a3
 
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
@@ -50,11 +40,6 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-<<<<<<< HEAD
-=======
-  <build_depend>urdf</build_depend>
-  <run_depend>urdf</run_depend>
->>>>>>> 99a0321d80826138d39254aa296b96160470d2a3
 
 
   <!-- The export tag contains other, unspecified, tags -->
